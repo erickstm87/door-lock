@@ -7,18 +7,21 @@ var CircularJSON = require('circular-json');
 const bodyParser = require('body-parser');
 
 var app = express();
+
+//var PORT = 4390;
+app.set('port', (process.env.PORT || 4390));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// We define the port we want to listen to. Logically this has to be the same port than we specified on ngrok.
-var accessToken = process.env.myToken;
 
-const PORT = 4390;
+app.use(express.static(__dirname + '/public'));
+// We define the port we want to listen to. Logically this has to be the same port than we specified on ngrok.
+var accessToken = 'xoxp-152176683142-151533438404-150918159712-f93320b14318a79ce6b39ba633e1a8e9';
 
 var verifiedUser = { id: 10};
-var token = jwt.sign(verifiedUser, process.env.secretPin);
+var token = jwt.sign(verifiedUser, 'aPin');
 
-app.listen(PORT, function() {
-  console.log('example app listening on port ' + PORT);
+app.listen(app.get('port'), function() {
+  console.log('example app listening on port', app.get('port'));
 });
 
 app.get('/', function(req, res){
