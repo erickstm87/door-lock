@@ -1,5 +1,5 @@
 // First we need to import the HTTP module. This module contains all the logic for dealing with HTTP requests.
-require('./config.json')
+//require('./config.json')
 var express = require('express');
 var request = require('request');
 const jwt = require('jsonwebtoken');
