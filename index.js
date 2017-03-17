@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 // We define the port we want to listen to. Logically this has to be the same port than we specified on ngrok.
 var accessToken = process.env.myToken;
-var verifiedUser = { id: 10};
+var verifiedUser = { id: process.env.myId };
 var token = jwt.sign(verifiedUser, process.env.aSecretPin);
 
 app.listen(app.get('port'), function() {
