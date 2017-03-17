@@ -1,5 +1,5 @@
 // First we need to import the HTTP module. This module contains all the logic for dealing with HTTP requests.
-//require('./config.json')
+
 var express = require('express');
 var request = require('request');
 const jwt = require('jsonwebtoken');
@@ -18,7 +18,7 @@ app.use(express.static(__dirname + '/public'));
 var accessToken = 'xoxp-152176683142-151533438404-150918159712-f93320b14318a79ce6b39ba633e1a8e9';
 
 var verifiedUser = { id: 10};
-var token = jwt.sign(verifiedUser, 'aPin');
+var token = jwt.sign(verifiedUser, aSecretPin);
 
 app.listen(app.get('port'), function() {
   console.log('example app listening on port', app.get('port'));
