@@ -5,8 +5,8 @@ var request = require('request');
 const jwt = require('jsonwebtoken');
 var CircularJSON = require('circular-json');
 const bodyParser = require('body-parser');
-
 var app = express();
+const http = require('http').Server(app);
 
 //var PORT = 4390;
 app.set('port', (process.env.PORT || 4390));
