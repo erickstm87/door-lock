@@ -19,7 +19,7 @@ app.use(express.static(__dirname + '/public'));
 var accessToken = process.env.myToken;
 var verifiedUser = { id: process.env.myId };
 var token = jwt.sign(verifiedUser, process.env.aSecretPin);
-
+//commment
 app.listen(app.get('port'), function() {
   console.log('example app listening on port', app.get('port'));
 });
