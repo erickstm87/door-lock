@@ -12,14 +12,13 @@ var socket = io.connect('https://guarded-ravine-69960.herokuapp.com/command', {r
 console.log('2');
 
 // Add a connect listener
-socket.on('connection', function(socket){
-  socket.on('connect', function(socket) {
-    console.log('Connected!');
-  });
-
-  socket.on('newMessage', function(msg){
-    console.log('message: ' + msg);
-  });
+socket.on('connect', function(socket) {
+  console.log('Connected!');
 });
+
+socket.on('newMessage', function(msg){
+  console.log('message: ' + msg);
+});
+
 
 console.log('3');
