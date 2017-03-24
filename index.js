@@ -56,7 +56,7 @@ app.get('/oauth', function(req, res) {
        res.send('I will obey');
      }
      catch(e){
-       io.emit('newMessage', {some: 'data'}); // main namespace
+       io.emit('newMessage', 'a message'); // main namespace
        res.send('don\'t understand');
      }
   });

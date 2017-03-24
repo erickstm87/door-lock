@@ -7,18 +7,17 @@ var io = require('socket.io-client');
 //app.set('port', (process.env.PORT || 4390));
 //var port = app.set('port', (process.env.PORT || 4390));
 //var url = 'https://guarded-ravine-69960.herokuapp.com' + port;
-var socket = io.connect('https://guarded-ravine-69960.herokuapp.com/command', {reconnect: true});
+var socket = io.connect('https://guarded-ravine-69960.herokuapp.com/', {reconnect: true});
 
 console.log('2');
 
 // Add a connect listener
 socket.on('connect', function(socket) {
   console.log('Connected!');
-});
 
-socket.on('newMessage', function(msg){
-  console.log('message: ' + msg);
+  socket.on('newMessage', function(msg){
+    console.log('message: ' + msg);
+  });
 });
-
 
 console.log('3');
