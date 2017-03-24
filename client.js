@@ -4,7 +4,8 @@ var io = require('socket.io-client');
 const express = require('express');
 var app = express();
 
-app.set('port', (process.env.PORT || 4390));
+//app.set('port', (process.env.PORT || 4390));
+var port = app.set('port', (process.env.PORT || 4390));
 var socket = io.connect(`https://guarded-ravine-69960.herokuapp.com:${port}`, {reconnect: true});
 
 console.log('2');
@@ -13,6 +14,10 @@ console.log('2');
 socket.on('connect', function(socket) {
   console.log('Connected!');
 });
+
+socket.on('newMessage', function(msg){
+  console.log('message: ' + msg);
+})
 
 console.log('3');
 

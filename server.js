@@ -7,6 +7,7 @@ var CircularJSON = require('circular-json');
 const bodyParser = require('body-parser');
 var app = express();
 const http = require('http').Server(app);
+var io = require('socket.io')();
 
 //var PORT = 4390;
 app.set('port', (process.env.PORT || 4390));
@@ -51,7 +52,8 @@ app.get('/oauth', function(req, res) {
 
   app.post('/command', function(req, res){
      try {
-       jwt.verify(token, req.body.text)
+       jwt.verify(token, req.body.text);
+       io.emit('newMessage', {some: 'data'}); // main namespace
        res.send('I will obey');
      }
      catch(e){
@@ -60,4 +62,3 @@ app.get('/oauth', function(req, res) {
   });
 
   //new comment
-  
