@@ -19,13 +19,16 @@ app.use(express.static(__dirname + '/public'));
 var accessToken = process.env.myToken;
 var verifiedUser = { id: process.env.myId };
 var token = jwt.sign(verifiedUser, process.env.aSecretPin);
-//commment
+
 app.listen(app.get('port'), function() {
   console.log('example app listening on port', app.get('port'));
 });
 
 app.get('/', function(req, res){
   res.send('ngrok is working. path hit: ' + req.url);
+  io.on('connection', function(socket){
+    io.emit('aMessage', 'here is the message');
+  });
 });
 
 app.get('/oauth', function(req, res) {
