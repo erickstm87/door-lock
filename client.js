@@ -13,4 +13,8 @@ socket.on('aMessage', function(msg){
   console.log('message: ' + msg);
 });
 
+socket.on('newMessage', function(msg){
+  console.log('a message emitted', msg);
+})
+
 console.log('3');
