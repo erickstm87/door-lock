@@ -22,13 +22,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(app.get('port'), function() {
   console.log('example app listening on port', app.get('port'));
-  io.on('connection', function(socket){
-    io.emit('aMessage', 'here is the message');
-  });
 });
 
 app.get('/', function(req, res){
   res.send('ngrok is working. path hit: ' + req.url);
+});
+
+io = io.listen(server);
+
+io.on('connection', function(socket){
+  io.sockets.emit('aMessage', 'here is the message');
 });
 
 app.get('/oauth', function(req, res) {
