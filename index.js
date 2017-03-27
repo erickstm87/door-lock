@@ -6,8 +6,9 @@ const bodyParser = require('body-parser');
 
 //Here is where I initialize my express server and my socket
 var app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+var server = require('http').createServer(app);
+//const http = require('http').Server(app);
+const io = require('socket.io').listen(server);
 
 //This is where the non public info goes
 var accessToken = process.env.myToken;

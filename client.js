@@ -1,12 +1,12 @@
 // Connect to server
 console.log('1');
 var io = require('socket.io-client');
-var socket = io.connect('https://guarded-ravine-69960.herokuapp.com/command', {reconnect: true});
+var socket = io.connect('https://guarded-ravine-69960.herokuapp.com/', {reconnect: true});
 
 console.log('2');
 
 // Add a connect listener
-socket.on('connection', function(socket) {
+socket.on('connect', function(socket) {
   console.log('Connected!');
 });
 
