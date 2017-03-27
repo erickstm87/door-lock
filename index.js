@@ -5,7 +5,7 @@ var request = require('request');
 const jwt = require('jsonwebtoken');
 var CircularJSON = require('circular-json');
 const bodyParser = require('body-parser');
-var app = express().listen(PORT, () => console.log(`Listening on ${ PORT }`));;
+var app = express().use((req, res) => res.sendFile(INDEX) );
 const http = require('http').Server(app);
 const io = socketIO(app);
 
