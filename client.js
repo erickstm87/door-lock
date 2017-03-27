@@ -15,7 +15,7 @@ console.log('2');
 socket.on('connect', function(socket) {
   console.log('Connected!');
 
-  socket.on('aMessage', function(msg){
+  socket.on('newMessage', function(msg){
     console.log('message: ' + msg);
   });
 });

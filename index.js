@@ -14,7 +14,7 @@ app.set('port', (process.env.PORT || 4390));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 // We define the port we want to listen to. Logically this has to be the same port than we specified on ngrok.
 var accessToken = process.env.myToken;
 var verifiedUser = { id: process.env.myId };
