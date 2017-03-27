@@ -7,7 +7,7 @@ var io = require('socket.io-client');
 //app.set('port', (process.env.PORT || 4390));
 //var port = app.set('port', (process.env.PORT || 4390));
 //var url = 'https://guarded-ravine-69960.herokuapp.com' + port;
-var socket = io.connect('https://guarded-ravine-69960.herokuapp.com/', {reconnect: true});
+var socket = io.connect('https://guarded-ravine-69960.herokuapp.com/command', {reconnect: true});
 
 console.log('2');
 
