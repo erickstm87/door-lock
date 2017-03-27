@@ -30,8 +30,8 @@ app.get('/', function(req, res){
 
 io = io.listen(server);
 
-io.on('connection', function(socket){
-  io.sockets.emit('aMessage', 'here is the message');
+io.sockets.on('connection', function(socket){
+  io.emit('aMessage', 'here is the message');
 });
 
 app.get('/oauth', function(req, res) {
