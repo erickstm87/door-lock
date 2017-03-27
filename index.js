@@ -9,7 +9,6 @@ var app = express();
 const http = require('http').Server(app);
 var io = require('socket.io')();
 
-//var PORT = 4390;
 app.set('port', (process.env.PORT || 4390));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -60,7 +59,7 @@ app.get('/oauth', function(req, res) {
      }
      catch(e){
        io.emit('newMessage', 'a message'); // main namespace
-       res.send('don\'t understand');
+       res.send(e);
      }
   });
 
