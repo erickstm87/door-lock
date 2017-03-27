@@ -54,13 +54,14 @@ app.get('/oauth', function(req, res) {
 
   app.post('/command', function(req, res){
      try {
+       io.on('connection', function(socket){
+         io.emit('newMessage', 'a message'); // main namespace
+       });
        jwt.verify(token, req.body.text);
-       io.emit('newMessage', 'a message'); // main namespace
        res.send('I will obey');
      }
      catch(e){
-       //io.emit('newMessage', 'a message'); // main namespace
-       res.send(e);
+       io.emit('newMessage', 'a message'); // main namespace
      }
   });
 
