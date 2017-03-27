@@ -7,7 +7,7 @@ var CircularJSON = require('circular-json');
 const bodyParser = require('body-parser');
 var app = express();
 const http = require('http').Server(app);
-var server = require('http').listen(app);
+//var server = require('http').listen(app);
 var io = require('socket.io')();
 
 app.set('port', (process.env.PORT || 4390));
