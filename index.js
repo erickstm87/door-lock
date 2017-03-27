@@ -7,7 +7,7 @@ var CircularJSON = require('circular-json');
 const bodyParser = require('body-parser');
 var app = express().use((req, res) => res.sendFile(INDEX) );
 const http = require('http').Server(app);
-const io = socketIO(app);
+//const io = socketIO(app);
 
 app.set('port', (process.env.PORT || 4390));
 app.use(bodyParser.json());
@@ -26,9 +26,9 @@ app.get('/', function(req, res){
   res.send('ngrok is working. path hit: ' + req.url);
 });
 
-io.on('connection', function(socket){
-  io.emit('aMessage', 'here is the message');
-});
+// io.on('connection', function(socket){
+//   io.emit('aMessage', 'here is the message');
+// });
 
 app.get('/oauth', function(req, res) {
   if(!req.query.code){
@@ -54,12 +54,12 @@ app.get('/oauth', function(req, res) {
 
 app.post('/command', function(req, res){
    try {
-     io.emit('newMessage', 'a message'); // main namespace
+     //io.emit('newMessage', 'a message'); // main namespace
      jwt.verify(token, req.body.text);
      res.send('I will obey');
    }
    catch(e){
-     io.emit('newMessage', 'a message'); // main namespace
+     //io.emit('newMessage', 'a message'); // main namespace
      res.send('don\'t understand')
    }
 });
