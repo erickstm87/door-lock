@@ -7,7 +7,6 @@ var CircularJSON = require('circular-json');
 const bodyParser = require('body-parser');
 var app = express();
 const http = require('http').Server(app);
-//var server = require('http').listen(app);
 const io = require('socket.io')(http);
 
 app.set('port', (process.env.PORT || 4390));
@@ -24,8 +23,8 @@ app.listen(app.get('port'), function() {
 });
 
 app.get('/', function(req, res){
-  res.send('ngrok is working. path hit: ' + req.url);
   io.on('connection', function(socket){
+    res.send('ngrok is working. path hit: ' + req.url);
     io.emit('aMessage', 'here is the message');
   });
 });
