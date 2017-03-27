@@ -1,6 +1,7 @@
 // Connect to server
 console.log('1');
-var io = require('socket.io-client');
+var socket = io();
+//var io = require('socket.io-client');
 // const express = require('express');
 // var app = express();
 
