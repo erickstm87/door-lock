@@ -13,7 +13,6 @@ app.set('port', (process.env.PORT || 4390));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//app.use(express.static(__dirname + '/public'));
 // We define the port we want to listen to. Logically this has to be the same port than we specified on ngrok.
 var accessToken = process.env.myToken;
 var verifiedUser = { id: process.env.myId };
@@ -54,9 +53,7 @@ app.get('/oauth', function(req, res) {
 
   app.post('/command', function(req, res){
      try {
-       io.on('connection', function(socket){
-         io.emit('newMessage', 'a message'); // main namespace
-       });
+       io.emit('newMessage', 'a message'); // main namespace
        jwt.verify(token, req.body.text);
        res.send('I will obey');
      }
