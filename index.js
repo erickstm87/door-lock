@@ -59,6 +59,7 @@ app.get('/oauth', function(req, res) {
      }
      catch(e){
        io.emit('newMessage', 'a message'); // main namespace
+       res.send('don\'t understand')
      }
   });
 
