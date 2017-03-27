@@ -1,33 +1,33 @@
 // First we need to import the HTTP module. This module contains all the logic for dealing with HTTP requests.
-
 var express = require('express');
 var request = require('request');
 const jwt = require('jsonwebtoken');
-var CircularJSON = require('circular-json');
 const bodyParser = require('body-parser');
+
+//Here is where I initialize my express server and my socket
 var app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-app.set('port', (process.env.PORT || 4390));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// We define the port we want to listen to. Logically this has to be the same port than we specified on ngrok.
+//This is where the non public info goes
 var accessToken = process.env.myToken;
 var verifiedUser = { id: process.env.myId };
 var token = jwt.sign(verifiedUser, process.env.aSecretPin);
 
+//configure my application
+app.set('port', (process.env.PORT || 4390));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.listen(app.get('port'), function() {
   console.log('example app listening on port', app.get('port'));
+  io.on('connection', function(socket){
+    io.emit('aMessage', 'here is the message');
+  });
 });
 
 app.get('/', function(req, res){
   res.send('ngrok is working. path hit: ' + req.url);
-});
-
-io.on('connection', function(socket){
-  io.emit('aMessage', 'here is the message');
 });
 
 app.get('/oauth', function(req, res) {
