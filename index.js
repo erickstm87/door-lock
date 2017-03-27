@@ -5,7 +5,7 @@ var request = require('request');
 const jwt = require('jsonwebtoken');
 var CircularJSON = require('circular-json');
 const bodyParser = require('body-parser');
-var app = express().use((req, res) => res.sendFile(INDEX) );
+var app = express();
 const http = require('http').Server(app);
 //const io = socketIO(app);
 
