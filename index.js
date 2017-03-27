@@ -23,10 +23,11 @@ app.listen(app.get('port'), function() {
 });
 
 app.get('/', function(req, res){
-  io.on('connection', function(socket){
-    res.send('ngrok is working. path hit: ' + req.url);
-    io.emit('aMessage', 'here is the message');
-  });
+  res.send('ngrok is working. path hit: ' + req.url);
+});
+
+io.on('connection', function(socket){
+  io.emit('aMessage', 'here is the message');
 });
 
 app.get('/oauth', function(req, res) {
