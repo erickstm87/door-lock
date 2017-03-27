@@ -55,10 +55,11 @@ app.get('/oauth', function(req, res) {
   app.post('/command', function(req, res){
      try {
        jwt.verify(token, req.body.text);
+       io.emit('newMessage', 'a message'); // main namespace
        res.send('I will obey');
      }
      catch(e){
-       io.emit('newMessage', 'a message'); // main namespace
+       //io.emit('newMessage', 'a message'); // main namespace
        res.send(e);
      }
   });
