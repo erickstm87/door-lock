@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 var app = express();
 const http = require('http').Server(app);
 //var server = require('http').listen(app);
-var io = require('socket.io')();
+const io = require('socket.io')(http);
 
 app.set('port', (process.env.PORT || 4390));
 app.use(bodyParser.json());
