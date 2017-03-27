@@ -5,14 +5,13 @@ var request = require('request');
 const jwt = require('jsonwebtoken');
 var CircularJSON = require('circular-json');
 const bodyParser = require('body-parser');
-var app = express();
+var app = express().listen(PORT, () => console.log(`Listening on ${ PORT }`));;
 const http = require('http').Server(app);
-
+const io = socketIO(app);
 
 app.set('port', (process.env.PORT || 4390));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const io = socketIO(app);
 
 // We define the port we want to listen to. Logically this has to be the same port than we specified on ngrok.
 var accessToken = process.env.myToken;
