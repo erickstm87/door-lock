@@ -53,9 +53,9 @@ app.get('/oauth', function(req, res) {
 });
 
 app.post('/command', function(req, res){
-  io.on('connection', function(socket){
-    io.emit('anEvent', 'a new message for connecting');
-  });
+
+  io.emit('anEvent', 'a new message for connecting');
+
    try {
      io.emit('newMessage', 'a message'); // main namespace
      //jwt.verify(token, req.body.text);
