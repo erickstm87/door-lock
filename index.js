@@ -28,6 +28,10 @@ app.get('/', function(req, res){
   res.send('ngrok is working. path hit: ' + req.url);
 });
 
+io.on('connection', function(socket){
+  socket.emit('here is the message?')
+});
+
 server.listen(3000);
 
 app.get('/oauth', function(req, res) {
@@ -54,7 +58,7 @@ app.get('/oauth', function(req, res) {
 
 app.post('/command', function(req, res){
 
-  io.emit('anEvent', 'a new message for connecting');
+   io.emit('anEvent', 'a new message for connecting');
 
    try {
      io.emit('newMessage', 'a message'); // main namespace
