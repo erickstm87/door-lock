@@ -54,7 +54,7 @@ app.get('/oauth', function(req, res) {
 
 app.post('/command', function(req, res){
   io.on('connection', function(socket){
-    console.log('client has connected');
+    io.emit('anEvent', 'a new message for connecting');
   });
    try {
      io.emit('newMessage', 'a message'); // main namespace
