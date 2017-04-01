@@ -6,14 +6,14 @@ const bodyParser = require('body-parser');
 
 //Here is where I initialize my express server and my socket
 var app = express();
+
 var server = require('http').createServer(app);
-//const http = require('http').Server(app);
-const io = require('socket.io').listen(server);
+var io = require('socket.io')(server);
 
 //This is where the non public info goes
-var accessToken = process.env.myToken;
-var verifiedUser = { id: process.env.myId };
-var token = jwt.sign(verifiedUser, process.env.aSecretPin);
+//var accessToken = process.env.myToken;
+//var verifiedUser = { id: process.env.myId };
+//var token = jwt.sign(verifiedUser, process.env.aSecretPin);
 
 //configure my application
 app.set('port', (process.env.PORT || 4390));
@@ -28,11 +28,7 @@ app.get('/', function(req, res){
   res.send('ngrok is working. path hit: ' + req.url);
 });
 
-io = io.listen(server);
-
-io.sockets.on('connection', function(socket){
-  io.emit('aMessage', 'here is the message');
-});
+server.listen(3000);
 
 app.get('/oauth', function(req, res) {
   if(!req.query.code){
@@ -57,9 +53,12 @@ app.get('/oauth', function(req, res) {
 });
 
 app.post('/command', function(req, res){
+  io.on('connection', function(socket){
+    console.log('client has connected');
+  });
    try {
      io.emit('newMessage', 'a message'); // main namespace
-     jwt.verify(token, req.body.text);
+     //jwt.verify(token, req.body.text);
      res.send('I will obey');
    }
    catch(e){
