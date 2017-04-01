@@ -1,6 +1,6 @@
 // Connect to server
 console.log('1');
-var socket = io('https://guarded-ravine-69960.herokuapp.com/', {reconnect: true});
+var socket = io('https://guarded-ravine-69960.herokuapp.com/socket.io/socket.io.js', {reconnect: true});
 //var socket = io();
 
 console.log('2');
