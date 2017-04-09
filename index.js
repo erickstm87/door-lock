@@ -20,19 +20,19 @@ app.set('port', (process.env.PORT || 4390));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.listen(app.get('port'), function() {
-  console.log('example app listening on port', app.get('port'));
-});
-
 app.get('/', function(req, res){
   res.send('ngrok is working. path hit: ' + req.url);
 });
 
 io.on('connection', function(socket){
-  socket.emit('here is the message?')
+  socket.emit('anEvent', 'emitted an event now from the server!!!!****');
 });
 
-server.listen(3000);
+app.listen(app.get('port'), function() {
+  console.log('example app listening on port', app.get('port'));
+});
+
+//server.listen('port');
 
 app.get('/oauth', function(req, res) {
   if(!req.query.code){
