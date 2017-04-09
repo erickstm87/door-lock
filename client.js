@@ -16,3 +16,7 @@ socket.on('aMessage', function(msg){
 socket.on('newMessage', function(msg){
   console.log('i\'m seeing your message from your pin!!!', msg);
 })
+
+socket.on('warning', function(msg){
+  console.log('you have a warning', msg);
+});
