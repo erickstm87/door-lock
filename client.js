@@ -12,3 +12,7 @@ socket.on('anEvent', function(msg){
 socket.on('aMessage', function(msg){
   console.log('here is your message', msg);
 });
+
+socket.on('newMessage', function(msg){
+  console.log('i\'m seeing your message from your pin!!!', msg);
+})

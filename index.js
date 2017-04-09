@@ -11,9 +11,9 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
 //This is where the non public info goes
-//var accessToken = process.env.myToken;
-//var verifiedUser = { id: process.env.myId };
-//var token = jwt.sign(verifiedUser, process.env.aSecretPin);
+var accessToken = process.env.myToken;
+var verifiedUser = { id: process.env.myId };
+var token = jwt.sign(verifiedUser, process.env.aSecretPin);
 
 //configure my application
 app.set('port', (process.env.PORT || 4390));
@@ -27,10 +27,6 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   socket.emit('anEvent', 'emitted an event now from the server!!!!****');
 });
-
-// app.listen(app.get('port'), function() {
-//   console.log('example app listening on port', app.get('port'));
-// });
 
 server.listen(app.get('port'));
 
@@ -58,11 +54,9 @@ app.get('/oauth', function(req, res) {
 
 app.post('/command', function(req, res){
 
-   io.emit('anEvent', 'a new message for connecting');
-
    try {
+     jwt.verify(token, req.body.text);
      io.emit('newMessage', 'a message'); // main namespace
-     //jwt.verify(token, req.body.text);
      res.send('I will obey');
    }
    catch(e){
