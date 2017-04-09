@@ -18,5 +18,5 @@ socket.on('newMessage', function(msg){
 })
 
 socket.on('warning', function(msg){
-  console.log('you have a warning', msg);
+  console.log('you have a warning:', msg);
 });
