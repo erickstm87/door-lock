@@ -28,11 +28,11 @@ io.on('connection', function(socket){
   socket.emit('anEvent', 'emitted an event now from the server!!!!****');
 });
 
-app.listen(app.get('port'), function() {
-  console.log('example app listening on port', app.get('port'));
-});
+// app.listen(app.get('port'), function() {
+//   console.log('example app listening on port', app.get('port'));
+// });
 
-//server.listen('port');
+server.listen(app.get('port'));
 
 app.get('/oauth', function(req, res) {
   if(!req.query.code){
