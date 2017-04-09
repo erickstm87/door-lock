@@ -60,7 +60,6 @@ app.post('/command', function(req, res){
      res.send('I will obey');
    }
    catch(e){
-     io.emit('newMessage', 'a message'); // main namespace
      res.send('don\'t understand')
    }
 });
