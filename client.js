@@ -6,5 +6,9 @@ socket.on('connect', function(){
 })
 
 socket.on('anEvent', function(msg){
-  console.log('here is the event', msg);
-})
+  console.log('here is your message', msg);
+});
+
+socket.on('aMessage', function(msg){
+  console.log('here is your message', msg);
+});
