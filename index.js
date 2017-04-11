@@ -56,7 +56,7 @@ app.post('/command', function(req, res){
 
    try {
      jwt.verify(token, req.body.text);
-     io.emit('newMessage', req.body.text); // main namespace
+     io.emit('newMessage', req.body.text); 
      res.send('I will obey');
    }
    catch(e){

@@ -1,6 +1,7 @@
 var io = require('socket.io-client');
 var localConfigs = require('./config')
 var socket = io(localConfigs.heroUrl);
+var bcrypt = require('bcryptjs');
 
 socket.on('connect', function(){
   console.log('connected to heroku app');
@@ -11,12 +12,15 @@ socket.on('anEvent', function(msg){
 });
 
 socket.on('newMessage', function(msg){
-  if(msg === localConfigs.secretPin){
-    console.log('you have opened the door');
-  }
-  else{
-    console.log('who are you?');
-  }
+  bcrypt.compare(msg, localConfigs.secretPin, (err, res) => {
+    if(res){
+      console.log('you have opened the door'); //this is where i'll open the door
+    }
+    else{
+      console.log('who are you?'); //this is where someone is trying to emit an event without knowing my pin
+    }
+  });
+
 });
 
 socket.on('warning', function(msg){
