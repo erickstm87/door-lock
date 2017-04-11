@@ -11,7 +11,7 @@ socket.on('anEvent', function(msg){
 });
 
 socket.on('newMessage', function(msg){
-  if(msg === req.body.txt){
+  if(msg === localConfigs.secretPin){
     console.log('you have opened the door:', msg);
   }
   else{
