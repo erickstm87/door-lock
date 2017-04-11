@@ -12,16 +12,12 @@ socket.on('anEvent', function(msg){
 
 socket.on('newMessage', function(msg){
   if(msg === localConfigs.secretPin){
-    console.log('you have opened the door:', msg);
+    console.log('you have opened the door');
   }
   else{
     console.log('who are you?');
   }
 });
-
-// socket.on('newMessage', function(msg){
-//   console.log('i\'m seeing your message from your pin!!!', msg);
-// })
 
 socket.on('warning', function(msg){
   console.log('you have a warning:', msg);
