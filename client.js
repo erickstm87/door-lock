@@ -1,5 +1,6 @@
 var io = require('socket.io-client');
-var socket = io('https://guarded-ravine-69960.herokuapp.com/');
+var localConfigs = require('./config')
+var socket = io(localConfigs.heroUrl);
 
 socket.on('connect', function(){
   console.log('connected to heroku app');
@@ -10,7 +11,12 @@ socket.on('anEvent', function(msg){
 });
 
 socket.on('aMessage', function(msg){
-  console.log('here is your message', msg);
+  if(msg === localConfigs.secretPin){
+    console.log('you have opened the door:', msg);
+  }
+  else{
+    console.log('who are you?');
+  }
 });
 
 socket.on('newMessage', function(msg){
