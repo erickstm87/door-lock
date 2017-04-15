@@ -1,7 +1,27 @@
-var io = require('socket.io-client');
-var localConfigs = require('./config')
-var socket = io(localConfigs.heroUrl);
-var bcrypt = require('bcryptjs');
+var io = require('socket.io-client'),
+    localConfigs = require('./config'),
+    socket = io(localConfigs.heroUrl),
+    bcrypt = require('bcryptjs'),
+    onoff = require('onoff');
+var Gpio = onoff.Gpio,
+  led = new Gpio(4, 'out'),
+  interval;
+
+var light = {
+  interval = setInterval(function() {
+  var value = (led.readSync() + 1) %2;
+  led.write(value, function() {
+    console.log('Changed LED state to: ', value);
+  });
+  }, 2000);
+
+  process.on('SIGINT', function() {
+    clearInterval(interval);
+    led.writeSync(0);
+    led.unexport();
+    console.log('Bye, bye');
+    process.exit();
+};
 
 socket.on('connect', function(){
   console.log('connected to heroku app');
@@ -27,3 +47,5 @@ socket.on('newMessage', function(msg){
 socket.on('warning', function(msg){
   console.log('you have a warning:', msg);
 });
+
+
