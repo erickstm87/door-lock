@@ -11,6 +11,7 @@ socket.on('anEvent', function(msg){
   console.log('here is your message', msg);
 });
 
+//turns out it's actually pretty difficult to connect to another client. You need the socket id  
 socket.on('newMessage', function(msg){
   bcrypt.compare(msg, localConfigs.secretPin, (err, res) => {
     if(res){
