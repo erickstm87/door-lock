@@ -3,24 +3,19 @@ var io = require('socket.io-client'),
     socket = io(localConfigs.heroUrl),
     bcrypt = require('bcryptjs'),
     onoff = require('onoff');
-var Gpio = onoff.Gpio,
-  led = new Gpio(4, 'out'),
-  interval;
+    Gpio = require('pigpio').Gpio,
+    led = new Gpio(17, {mode: Gpio.OUTPUT}),
+    dutyCycle = 0;
 
-var light = {
-  interval = setInterval(function() {
-  var value = (led.readSync() + 1) %2;
-  led.write(value, function() {
-    console.log('Changed LED state to: ', value);
-  });
-  }, 2000);
-
-  process.on('SIGINT', function() {
-    clearInterval(interval);
-    led.writeSync(0);
-    led.unexport();
-    console.log('Bye, bye');
-    process.exit();
+var light = function(){
+  setInterval(function () {
+    led.pwmWrite(dutyCycle);
+ 
+    dutyCycle += 5;
+    if (dutyCycle > 255) {
+      dutyCycle = 0;
+    }
+  }, 20);
 };
 
 socket.on('connect', function(){
@@ -35,6 +30,7 @@ socket.on('anEvent', function(msg){
 socket.on('newMessage', function(msg){
   bcrypt.compare(msg, localConfigs.secretPin, (err, res) => {
     if(res){
+      light();
       console.log('you have opened the door'); //this is where i'll open the door
     }
     else{
