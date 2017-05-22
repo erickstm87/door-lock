@@ -61,7 +61,8 @@ socket.on('anEvent', function(msg){
 socket.on('newMessage', function(msg){
   bcrypt.compare(msg, localConfigs.secretPin, (err, res) => {
     if(res){
-      light();
+      //light();
+      lockDoor();
       console.log('you have opened the door'); //this is where i'll open the door
     }
     else{
@@ -75,4 +76,21 @@ socket.on('warning', function(msg){
   console.log('you have a warning:', msg);
 });
 
+function lockDoor() {
+	motor.servoWrite(lockedState);
+	//led.digitalWrite(1);
+	locked = true
+  	
+  	//After 1.5 seconds, the door lock servo turns off to avoid stall current
+  	setTimeout(function(){motor.servoWrite(0)}, 1500)
+}
+
+function unlockDoor() {
+	motor.servoWrite(unlockedState);
+	//led.digitalWrite(0);
+	locked = false
+
+  	//After 1.5 seconds, the door lock servo turns off to avoid stall current
+  	setTimeout(function(){motor.servoWrite(0)}, 1500)
+}
 
