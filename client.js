@@ -1,24 +1,6 @@
 var io = require('socket.io-client'),
     localConfigs = require('./config'),
     socket = io(localConfigs.heroUrl),
-<<<<<<< HEAD
-    bcrypt = require('bcryptjs'),
-    Gpio = require('pigpio').Gpio,
-      motor = new Gpio(motorPin, {mode: Gpio.OUTPUT}),
-      button = new Gpio(buttonPin, {
-        mode: Gpio.INPUT,
-        pullUpDown: Gpio.PUD_DOWN,
-        edge: Gpio.FALLING_EDGE
-      }),
-    led = new Gpio(ledPin, {mode: Gpio.OUTPUT});
-//initialize my servo
-var unlockedState = 1000,
-    lockedState = 2200,
-    motorPin = 14,
-    buttonPin = 4,
-    ledPin = 17,
-    locked = true;
-=======
     bcrypt = require('bcryptjs');
 
 //setup my servo
@@ -38,7 +20,6 @@ var Gpio = require('pigpio').Gpio,
 
 lockDoor();
 //button setup here
->>>>>>> gpio
 
 socket.on('connect', function(){
   console.log('connected to heroku app');
@@ -52,9 +33,6 @@ socket.on('anEvent', function(msg){
 socket.on('newMessage', function(msg){
   bcrypt.compare(msg, localConfigs.secretPin, (err, res) => {
     if(res){
-<<<<<<< HEAD
-      led();
-=======
       if(locked === true)
       {
         unlockDoor();
@@ -65,7 +43,6 @@ socket.on('newMessage', function(msg){
         lockDoor();
   	//socket.emit('lockedState', 'isLocked');
       }
->>>>>>> gpio
       console.log('you have opened the door'); //this is where i'll open the door
     }
     else{
@@ -79,17 +56,9 @@ socket.on('warning', function(msg){
   console.log('you have a warning:', msg);
 });
 
-<<<<<<< HEAD
-
-//declare the lock and unlock
-function lockDoor() {
-	motor.servoWrite(lockedState);
-	led.digitalWrite(1);
-=======
 function lockDoor() {
 	motor.servoWrite(lockedState);
 	//led.digitalWrite(1);
->>>>>>> gpio
 	locked = true
   	
   	//After 1.5 seconds, the door lock servo turns off to avoid stall current
@@ -98,11 +67,7 @@ function lockDoor() {
 
 function unlockDoor() {
 	motor.servoWrite(unlockedState);
-<<<<<<< HEAD
-	led.digitalWrite(0);
-=======
 	//led.digitalWrite(0);
->>>>>>> gpio
 	locked = false
 
   	//After 1.5 seconds, the door lock servo turns off to avoid stall current
