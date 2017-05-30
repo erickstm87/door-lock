@@ -64,13 +64,13 @@ app.post('/command', function(req, res){
      res.send('don\'t understand')
    }
 });
-io.on('lockedState', function(msg){
-  if(msg === 'isLocked')
-  {
-    res.send('Locked the door');
-  }
-  else if(msg === 'isNotLocked')
-  {
-    res.send('Unlocked the door');
-  }
-});
+//io.on('lockedState', function(msg){
+//  if(msg === 'isLocked')
+//  {
+//    res.send('Locked the door');
+//  }
+//  else if(msg === 'isNotLocked')
+//  {
+//    res.send('Unlocked the door');
+//  }
+//});
