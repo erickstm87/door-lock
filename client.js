@@ -36,12 +36,12 @@ socket.on('newMessage', function(msg){
       if(locked === true)
       {
         unlockDoor();
-	socket.emit('locked state', 'isNotLocked');
+	socket.emit('lockedState', 'isNotLocked');
       }
       else
       {
         lockDoor();
-  	socket.emit('locked state', 'isLocked');
+  	socket.emit('lockedState', 'isLocked');
       }
       console.log('you have opened the door'); //this is where i'll open the door
     }
