@@ -28,17 +28,6 @@ io.on('connection', function(socket){
   socket.emit('anEvent', 'emitted an event now from the server!!!!****');
 });
 
-io.on('locked state', function(msg){
-  if(msg === 'isLocked')
-  {
-    res.send('Locked the door');
-  }
-  else if(msg === 'isNotLocked')
-  {
-    res.send('Unlocked the door');
-  }
-});
-
 server.listen(app.get('port'));
 
 app.get('/oauth', function(req, res) {
@@ -74,4 +63,14 @@ app.post('/command', function(req, res){
      io.emit('warning', 'someone is passing the wrong pin');
      res.send('don\'t understand')
    }
+  io.on('locked state', function(msg){
+    if(msg === 'isLocked')
+    {
+      res.send('Locked the door');
+    }
+    else if(msg === 'isNotLocked')
+    {
+      res.send('Unlocked the door');
+    }
+  });
 });
