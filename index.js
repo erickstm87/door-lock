@@ -28,6 +28,17 @@ io.on('connection', function(socket){
   socket.emit('anEvent', 'emitted an event now from the server!!!!****');
 });
 
+io.on('locked state', function(msg){
+  if(msg === 'isLocked')
+  {
+    res.send('Locked the door');
+  }
+  else if(msg === 'isNotLocked')
+  {
+    res.send('Unlocked the door');
+  }
+});
+
 server.listen(app.get('port'));
 
 app.get('/oauth', function(req, res) {

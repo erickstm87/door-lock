@@ -33,8 +33,16 @@ socket.on('anEvent', function(msg){
 socket.on('newMessage', function(msg){
   bcrypt.compare(msg, localConfigs.secretPin, (err, res) => {
     if(res){
-      //light();
-      unlockDoor();
+      if(locked === true)
+      {
+        unlockDoor();
+	socket.emit('locked state', 'isNotLocked');
+      }
+      else
+      {
+        lockDoor();
+  	socket.emit('locked state', 'isLocked');
+      }
       console.log('you have opened the door'); //this is where i'll open the door
     }
     else{
