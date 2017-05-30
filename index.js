@@ -63,6 +63,7 @@ app.post('/command', function(req, res){
      io.emit('warning', 'someone is passing the wrong pin');
      res.send('don\'t understand')
    }
+});
   io.on('locked state', function(msg){
     if(msg === 'isLocked')
     {
@@ -73,4 +74,3 @@ app.post('/command', function(req, res){
       res.send('Unlocked the door');
     }
   });
-});
