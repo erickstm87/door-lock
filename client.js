@@ -32,21 +32,19 @@ socket.on('anEvent', function(msg){
 //turns out it's actually pretty difficult to connect to another client. You need the socket id  
 socket.on('newMessage', function(msg){
   bcrypt.compare(msg, localConfigs.secretPin, (err, res) => {
-    if(res){
-      if(locked === true)
-      {
-        unlockDoor();
-	    socket.emit('lockedState', 'isNotLocked');
-      }
-      else
-      {
-        lockDoor();
-  	    socket.emit('lockedState', 'isLocked');
-      }
-      console.log('you have opened the door'); //this is where i'll open the door
+    if(res && locked === true){
+      unlockDoor();
     }
+    
     else{
-      console.log('who are you?'); //this is where someone is trying to emit an event without knowing my pin
+      bcrypt.compare(msg, localConfigs.anotherSecret, (err, res) => { //anotherSecret is lock
+      if(res && locked === false){
+	lockDoor();
+      }
+      else{
+	console.log('who are you?');
+      }
+    }
     }
   });
 
