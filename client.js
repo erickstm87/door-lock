@@ -38,16 +38,15 @@ socket.on('newMessage', function(msg){
     
     else{
       bcrypt.compare(msg, localConfigs.anotherSecret, (err, res) => { //anotherSecret is lock
-      if(res && locked === false){
-	lockDoor();
-      }
-      else{
-	console.log('who are you?');
-      }
+        if(res && locked === false){
+	  lockDoor();
+        }
+        else{
+	  console.log('who are you?');
+        }
+      });
     }
-    }
-  });
-
+   });
 });
 
 socket.on('warning', function(msg){
@@ -71,4 +70,3 @@ function unlockDoor() {
   	//After 1.5 seconds, the door lock servo turns off to avoid stall current
   	setTimeout(function(){motor.servoWrite(0)}, 1500)
 }
-

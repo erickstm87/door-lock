@@ -14,6 +14,7 @@ var io = require('socket.io')(server);
 var accessToken = process.env.myToken;
 var verifiedUser = { id: process.env.myId };
 var token = jwt.sign(verifiedUser, process.env.aSecretPin);
+var anotherToken = jwt.sign(verifiedUser, process.env.anotherSecret);
 
 //configure my application
 app.set('port', (process.env.PORT || 4390));
@@ -60,7 +61,13 @@ app.post('/command', function(req, res){
      res.send('I will obey');
    }
    catch(e){
-     io.emit('warning', 'someone is passing the wrong pin');
-     res.send('don\'t understand')
-   }
+     try{
+       jwt.verify(anotherToken, req.body.text);
+       io.emit('newMessage', req.body.text);
+     }
+     catch(e){
+       io.emit('warning', 'someone is passing the wrong pin');
+       res.send('don\'t understand')
+     } 
+  }
 });
