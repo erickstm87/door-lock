@@ -58,12 +58,13 @@ app.post('/command', function(req, res){
    try {
      jwt.verify(token, req.body.text);
      io.emit('newMessage', req.body.text); 
-     res.send('I will obey');
+     res.send('Door is locked');
    }
    catch(e){
      try{
        jwt.verify(anotherToken, req.body.text);
        io.emit('newMessage', req.body.text);
+       res.send('Door is unlocked Hail Satan');
      }
      catch(e){
        io.emit('warning', 'someone is passing the wrong pin');
