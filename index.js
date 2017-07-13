@@ -1,6 +1,7 @@
 // First we need to import the HTTP module. This module contains all the logic for dealing with HTTP requests.
-var express = require('express');
-var request = require('request');
+var express = require('express'),
+    request = require('request');
+
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 
@@ -57,7 +58,7 @@ app.post('/command', function(req, res){
 
    try {
      jwt.verify(token, req.body.text);
-     io.emit('newMessage', req.body.text); 
+     io.emit('newMessage', req.body.text);
      res.send('Door is unlocked hail satan');
    }
    catch(e){
@@ -69,6 +70,6 @@ app.post('/command', function(req, res){
      catch(e){
        io.emit('warning', 'someone is passing the wrong pin');
        res.send('don\'t understand')
-     } 
+     }
   }
 });
