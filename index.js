@@ -1,20 +1,20 @@
 // First we need to import the HTTP module. This module contains all the logic for dealing with HTTP requests.
-var express = require('express');
-var request = require('request');
+var express = require('express'),
+    request = require('request');
+
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 
 //Here is where I initialize my express server and my socket
-var app = express();
-
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+var app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io')(server);
 
 //This is where the non public info goes
-var accessToken = process.env.myToken;
-var verifiedUser = { id: process.env.myId };
-var token = jwt.sign(verifiedUser, process.env.aSecretPin);
-var anotherToken = jwt.sign(verifiedUser, process.env.anotherSecret);
+var accessToken = process.env.myToken,
+    verifiedUser = { id: process.env.myId },
+    token = jwt.sign(verifiedUser, process.env.aSecretPin),
+    anotherToken = jwt.sign(verifiedUser, process.env.anotherSecret);
 
 //configure my application
 app.set('port', (process.env.PORT || 4390));
@@ -57,7 +57,7 @@ app.post('/command', function(req, res){
 
    try {
      jwt.verify(token, req.body.text);
-     io.emit('newMessage', req.body.text); 
+     io.emit('newMessage', req.body.text);
      res.send('Door is unlocked hail satan');
    }
    catch(e){
@@ -69,6 +69,6 @@ app.post('/command', function(req, res){
      catch(e){
        io.emit('warning', 'someone is passing the wrong pin');
        res.send('don\'t understand')
-     } 
+     }
   }
 });
